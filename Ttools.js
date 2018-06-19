@@ -210,3 +210,22 @@ function loadScript(url,callback) {
 //     color: #0f0 !important;
 //     outline: solid #f00 1px !important;
 // }
+
+// 16.最完美继承模式--圣杯模式(两函数的原型传递)
+function inherit (Target,Origin) {
+    function F() {};
+    F.prototype = Origin.prototype;
+    Target.prototype = new F();
+    Target.prototype.constructor = Target;   //将Target的constructor归位，避免constructor的指向错乱
+    Target.prototype.uber = Origin.prototype;   //将Target真正继承自谁这一信息保存在后台
+}
+// 16.1圣杯模式的另一种写法（推荐）
+// var inherit = (function () {
+//     var F = function () {};
+//     return function (Target,Origin) {
+//         F.prototype = Origin.prototype;
+//         Target.prototype = new F();
+//         Target.prototype.constructor = Target;
+//         Target.prototype.uber = Origin.prototype;
+//     }
+// }());
