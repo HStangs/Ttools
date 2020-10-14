@@ -230,7 +230,7 @@ function inherit (Target,Origin) {
 //     }
 // }());
 
-// 17 快排
+// 17.快排
 function quickSort(arr) {
   if (!arr || !arr.length) return [];
   if (arr.length === 1) return arr;
@@ -246,3 +246,10 @@ function quickSort(arr) {
 
   return [...quickSort(left), middle, ...quickSort(right)];
 }
+
+// 18.柯里化
+const curry = (fn, arr = []) => (...args) => (
+  arg => arg.length === fn.length
+    ? fn(...arg)
+    : curry(fn, arg)
+)([...arr, ...args])
