@@ -229,3 +229,20 @@ function inherit (Target,Origin) {
 //         Target.prototype.uber = Origin.prototype;
 //     }
 // }());
+
+// 17 快排
+function quickSort(arr) {
+  if (!arr || !arr.length) return [];
+  if (arr.length === 1) return arr;
+
+  const [middle, ...rest] = arr;
+  const { left, right } = rest.reduce(
+    (acc, item) =>
+      item <= middle
+        ? { ...acc, left: [...acc.left, item] }
+        : { ...acc, right: [...acc.right, item] },
+    { left: [], right: [] }
+  );
+
+  return [...quickSort(left), middle, ...quickSort(right)];
+}
